@@ -1,5 +1,5 @@
 // cell.rs
-// olds the definition of cells.
+// holds the definition of cells.
 //
 // by ltabis
 
@@ -10,16 +10,16 @@ pub enum CellState {
     DEAD
 }
 
-// olds data for one cell.
+// holds data for one cell.
 #[derive(Debug)]
 pub struct Cell {
     state: CellState,
-    x: i32,
-    y: i32
+    x: u32,
+    y: u32
 }
 
 impl Cell {
-    pub fn new(state: CellState, x: i32, y: i32) -> Self {
+    pub fn new(state: CellState, x: u32, y: u32) -> Self {
         Cell {
             state,
             x,

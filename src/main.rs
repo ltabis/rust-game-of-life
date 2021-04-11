@@ -1,7 +1,9 @@
-use rust_game_of_life::cell;
+use rust_game_of_life::universe::{ Universe };
 
 fn main() {
-    let mycell = cell::Cell::new(cell::CellState::ALIVE, 0, 0);
+    let my_universe = Universe::new();
 
-    println!("{:?}", mycell);
+    for cell in my_universe.playground.iter() {
+        println!("{:?}", cell);
+    }
 }
