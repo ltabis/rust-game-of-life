@@ -7,6 +7,7 @@ pub const CELL_SIZE: u32 = 10;
 
 // describe the state of a cell.
 #[derive(Debug)]
+#[derive(Copy, Clone)]
 pub enum CellState {
     ALIVE,
     DEAD
@@ -17,7 +18,7 @@ pub enum CellState {
 pub struct Cell {
     pub state: CellState,
     pub x: u32,
-    pub y: u32
+    pub y: u32,
 }
 
 impl Cell {
