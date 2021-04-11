@@ -37,13 +37,6 @@ impl Universe {
             // TODO: refactore this code. Idea: only draw ALIVE cells.
             for cell in self.playground.iter() {
 
-                // println!("{}, {}, {}, {}",
-                //     (self.display_x + (cell.x * CELL_SIZE)) as f64,
-                //     (self.display_y + (cell.y * CELL_SIZE)) as f64,
-                //     (self.display_x + ((cell.x + 1) * CELL_SIZE)) as f64,
-                //     (self.display_y + ((cell.y + 1) * CELL_SIZE)) as f64
-                // );
-
                 rectangle(
                     cell.get_state_color(),
                     [
@@ -56,7 +49,6 @@ impl Universe {
                     graphics
                 );
             }
-            // panic!();
         });
     }
 
