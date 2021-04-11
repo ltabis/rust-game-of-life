@@ -3,6 +3,8 @@
 //
 // by ltabis
 
+pub const CELL_SIZE: u32 = 10;
+
 // describe the state of a cell.
 #[derive(Debug)]
 pub enum CellState {
@@ -13,17 +15,20 @@ pub enum CellState {
 // holds data for one cell.
 #[derive(Debug)]
 pub struct Cell {
-    state: CellState,
-    x: u32,
-    y: u32
+    pub state: CellState,
+    pub x: u32,
+    pub y: u32
 }
 
 impl Cell {
     pub fn new(state: CellState, x: u32, y: u32) -> Self {
-        Cell {
-            state,
-            x,
-            y
+        Cell { state, x, y }
+    }
+
+    pub fn get_state_color(&self) -> [f32; 4] {
+        match &self.state {
+            CellState::ALIVE => [1.0, 1.0, 1.0, 1.0],
+            CellState::DEAD => [0.0, 0.0, 0.0, 1.0],
         }
     }
 }
