@@ -1,9 +1,8 @@
-use rust_game_of_life::universe::{ Universe };
+use rust_game_of_life::universe::{ Universe, Graphics };
 
 fn main() {
-    let my_universe = Universe::new();
+    let mut my_graphics = Graphics::default();
+    let mut my_universe = Universe::default();
 
-    for cell in my_universe.playground.iter() {
-        println!("{:?}", cell);
-    }
+    my_universe.run(&mut my_graphics);
 }
