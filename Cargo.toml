@@ -1,6 +1,6 @@
 [package]
 name = "rust-game-of-life"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["ltabis <tab.rysak70@gmail.com>"]
 edition = "2018"
 
