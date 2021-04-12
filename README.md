@@ -11,4 +11,4 @@ The was to apply and learn rust through a cool little project.
 
 select your targeted plateform in the release section.
 
-[example](./placeholder.png)
+![example](placeholder.png)
