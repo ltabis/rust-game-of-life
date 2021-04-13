@@ -6,7 +6,7 @@
 
 extern crate piston_window;
 
-use std::{ vec::Vec };
+use std::{ vec::Vec, time::Instant };
 use piston_window::*;
 
 use super::cell::{ Cell, CellState, CELL_SIZE };
@@ -17,7 +17,7 @@ const DEFAULT_PLAYGROUND_Y_SIZE: u32 = 40;
 const DEFAULT_WINDOW_X_SIZE: u32 = 500;
 const DEFAULT_WINDOW_Y_SIZE: u32 = 500;
 
-const DEFAULT_UPDATE_TIME: f64 = 0.1;
+const DEFAULT_UPDATE_TIME: u128 = 1;
 
 pub struct Universe {
     pub playground: Vec<Cell>,
@@ -25,9 +25,9 @@ pub struct Universe {
     y: u32,
     display_x: u32,
     display_y: u32,
-    last_frame: f64,
-    current_frame: f64,
-    update_time: f64,
+    last_frame: Instant,
+    current_frame: Instant,
+    update_time: u128,
 }
 
 impl Universe {
@@ -71,22 +71,20 @@ impl Universe {
         });
     }
 
-    fn update(&mut self, event: Event) {
-
+    fn update(&mut self, _event: Event) {
         // updating current frame time.
-        if let Some(t) = event.update_args() {
-            self.current_frame += t.dt;
-        }
+        self.current_frame = Instant::now();
 
         // computing rules every update_time seconds.
-        if self.current_frame - self.last_frame >= self.update_time {
+        if (self.current_frame - self.last_frame).as_millis() >= self.update_time {
             self.last_frame = self.current_frame;
-
             self.compute_rules();
         }
     }
 
     fn compute_rules(&mut self) {
+
+        // ! this is so slow ...
         let mut new_playground = Universe::new_playground(self.x, self.y);
 
         for y in 0..self.y {
@@ -152,8 +150,8 @@ impl Universe {
             y: DEFAULT_PLAYGROUND_Y_SIZE,
             display_x: (DEFAULT_WINDOW_X_SIZE / 2) - (DEFAULT_PLAYGROUND_X_SIZE / 2 * CELL_SIZE),
             display_y: (DEFAULT_WINDOW_Y_SIZE / 2) - (DEFAULT_PLAYGROUND_Y_SIZE / 2 * CELL_SIZE),
-            last_frame: 0.0,
-            current_frame: 0.0,
+            last_frame: Instant::now(),
+            current_frame: Instant::now(),
             update_time: DEFAULT_UPDATE_TIME,
         }
     }
@@ -167,8 +165,8 @@ impl Universe {
             y: y_size,
             display_x: (DEFAULT_WINDOW_X_SIZE / 2) - (x_size / 2 * CELL_SIZE),
             display_y: (DEFAULT_WINDOW_Y_SIZE / 2) - (y_size / 2 * CELL_SIZE),
-            last_frame: 0.0,
-            current_frame: 0.0,
+            last_frame: Instant::now(),
+            current_frame: Instant::now(),
             update_time: DEFAULT_UPDATE_TIME,
         }
     }
